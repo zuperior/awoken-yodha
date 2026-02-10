@@ -28,15 +28,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <header className="border-b border-zinc-200 bg-white/60 backdrop-blur-sm dark:bg-black/60 dark:border-zinc-800">
-          <div className="mx-auto flex max-w-5xl items-center justify-between p-4">
-            <nav className="flex gap-4">
-              <Link href="/" className="text-sm font-medium">Home</Link>
-              <Link href="/home" className="text-sm font-medium">Home (page)</Link>
-              <Link href="/awareness" className="text-sm font-medium">Awareness</Link>
-            </nav>
-          </div>
-        </header>
+    
         <main>{children}</main>
       </body>
     </html>
