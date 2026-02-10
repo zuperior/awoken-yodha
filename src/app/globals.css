@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+   overflow: hidden; 
+}
+
+body {
+  background-image: url('/home/background-image.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.font-cinzel {
+  font-family: var(--font-cinzel-decorative), serif;
+}
+
+/* (Optional) Utility class for Clash also */
+.font-clash {
+  font-family: var(--font-clash-grotesk), sans-serif;
+}
+
+.font-clash-display {
+  font-family: var(--font-clash-display), sans-serif;
+}

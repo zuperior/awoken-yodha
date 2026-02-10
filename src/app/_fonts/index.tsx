@@ -1,0 +1,38 @@
+import localFont from "next/font/local";
+import { Cinzel_Decorative } from "next/font/google";
+
+
+export const clashGrotesk = localFont({
+  src: [
+    { path: "./ClashGrostek/ClashGrotesk-Extralight.woff2", weight: "200", style: "normal" },
+    { path: "./ClashGrostek/ClashGrotesk-Light.woff2", weight: "300", style: "normal" },
+    { path: "./ClashGrostek/ClashGrotesk-Regular.woff2", weight: "400", style: "normal" },
+    { path: "./ClashGrostek/ClashGrotesk-Medium.woff2", weight: "500", style: "normal" },
+    { path: "./ClashGrostek/ClashGrotesk-Semibold.woff2", weight: "600", style: "normal" },
+    { path: "./ClashGrostek/ClashGrotesk-Bold.woff2", weight: "700", style: "normal" },
+    { path: "./ClashGrostek/ClashGrotesk-Variable.woff2", weight: "100 900", style: "normal" },
+  ],
+  variable: "--font-clash-grotesk",
+  display: "swap",
+});
+
+export const clashDisplay = localFont({
+  src: [
+    { path: "./ClashDisplay/ClashDisplay-Extralight.woff2", weight: "200", style: "normal" },
+    { path: "./ClashDisplay/ClashDisplay-Light.woff2", weight: "300", style: "normal" },
+    { path: "./ClashDisplay/ClashDisplay-Regular.woff2", weight: "400", style: "normal" },
+    { path: "./ClashDisplay/ClashDisplay-Medium.woff2", weight: "500", style: "normal" },
+    { path: "./ClashDisplay/ClashDisplay-Semibold.woff2", weight: "600", style: "normal" },
+    { path: "./ClashDisplay/ClashDisplay-Bold.woff2", weight: "700", style: "normal" },
+    { path: "./ClashDisplay/ClashDisplay-Variable.woff2", weight: "100 900", style: "normal" },
+  ],
+  variable: "--font-clash-display",
+  display: "swap",
+});
+
+export const cinzelDecorative = Cinzel_Decorative({
+  subsets: ["latin"],
+  weight: ["400", "700", "900"],
+  variable: "--font-cinzel-decorative",
+  display: "swap",
+});

@@ -1,11 +1,66 @@
+import Button from "@/components/Button";
+
 export default function HomePage() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-white to-zinc-50 p-8 dark:from-black dark:to-zinc-900">
-      <h1 className="mb-4 text-4xl font-bold">Welcome to Home</h1>
-      <p className="max-w-2xl text-center text-zinc-700 dark:text-zinc-300">
-        This is the dedicated Home page. Use this space to introduce your
-        application, show featured content, or link to important sections.
-      </p>
+    <div className="relative w-full h-[623px] pb-[50px] mt-[160px]  flex">
+      <div className="relative h-[241px] flex flex-col justify-center items-start pb-[50px] pt-[435px] pl-[124px] pr-[290px]">
+        <h1 className="w-[551px] h-[72px] font-cinzel font-bold text-[67px] leading-[72px] tracking-[-0.06em] text-[#F5F3E8]">
+          Awoken Yodha
+        </h1>
+        <h2 className="w-[552px] h-[36px] font-clash-display font-medium text-[25px] leading-[36px] tracking-[-0.01em] text-[#F5F3E8] whitespace-nowrap">
+          is not a page you follow. It’s a decision you make.
+        </h2>
+        <h2 className="w-[422px] h-[52px] mt-[15px] font-clash font-normal text-[20px] leading-[1.3] tracking-[0em] text-white ">
+          This is not entertainment. It is a direct intervention into your brain architecture
+        </h2>
+        <Button variant="titleRed" className="mt-[15px] self-start">
+          Start Your Journey
+        </Button>
+      </div>
+
+      {/* <div className="absolute w-[240px]   h-[573px] flex flex-col justify-center items-center flex-nowrap  gap-6 p-0  bg-red-800"> */}
+      <div className="absolute right-[50px] top-1/2 -translate-y-1/2 w-[240px] h-[573px] flex flex-col justify-center items-center gap-6 ">
+
+        <div className="w-[172px]  h-[532px] flex flex-col justify-center items-center flex-nowrap  gap-6 p-0 ">
+          <div className="w-[35px] h-[35px] flex justify-center items-center gap-[10px] p-[15px] rounded-[200px] bg-[#FBFBD9] font-medium ">
+            1
+          </div>
+          <div className=" relative w-[2px] h-[50px] rounded-[5px] bg-[#FFFFFF] "> </div>
+          <h1 className="w-[112px] h-[21px] font-clash  text-[16px] leading-[1.3em] tracking-0 font-medium text-left text-[#FFFFFF] ">
+            Fill your details.
+          </h1>
+          <div className="w-[35px] h-[35px] flex justify-center items-center gap-[10px] p-[15px] rounded-[200px] bg-[#FBFBD9] font-medium ">
+            2
+          </div>
+
+          <div className=" relative w-[2px] h-[50px] rounded-[5px] bg-[#FFFFFF] "> </div>
+          <h1 className="w-[146px] h-[21px] font-clash  text-[16px] leading-[1.3em] tracking-0 font-medium text-left text-[#FFFFFF] whitespace-nowrap">
+            Join the Community.
+          </h1>
+          <div className="w-[35px] h-[35px] flex justify-center items-center gap-[10px] p-[15px] rounded-[200px] bg-[#FBFBD9] font-medium  ">
+            3
+          </div>
+
+          <div className=" relative w-[2px] h-[50px] rounded-[5px] bg-[#FFFFFF] "> </div>
+          <h1 className="w-[172px] h-[20px] font-clash  text-[16px] leading-[1.3em] tracking-0 font-medium text-left text-[#FFFFFF] whitespace-nowrap">
+            Download the workbook.
+          </h1>
+        </div>
+
+        <h1 className="w-full h-[16px] font-clash font-regular text-[12px] leading-[1.3em] tracking-0 text-center  "> <p className="whitespace-nowrap">
+          <span className="text-[#FF7575]/75">
+            Disclaimer : &nbsp;
+          </span>
+          <span className="text-[#FBFBD9]">
+            If you do not meditate, do not join
+          </span>
+        </p>.</h1>
+
+
+
+      </div>
     </div>
+
+
   );
 }
