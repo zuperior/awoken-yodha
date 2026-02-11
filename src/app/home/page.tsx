@@ -1,4 +1,3 @@
-
 "use client"
 
 import Button from "@/components/Button";
@@ -49,7 +48,7 @@ const MobileStepItem = ({ id, title }: { id: number; title: string }) => {
       <div className="w-[40px] h-[40px] flex justify-center items-center rounded-full bg-[#FBFBD9] font-medium text-[14px] shrink-0">
         {id}
       </div>
-      <span className="font-clash text-[9px] text-[#FFFFFF] text-center px-1 leading-tight">
+      <span className="font-clash   text-[12px] md:text-[16px] text-[#FFFFFF] text-center px-1 leading-[1.3em]  tracking-0">
         {title}
       </span>
     </div>
@@ -60,9 +59,9 @@ const MobileStepItem = ({ id, title }: { id: number; title: string }) => {
 const HeroContent = ({ isMobile = false }: { isMobile?: boolean }) => {
   const textClasses = isMobile
     ? {
-      title: "w-full font-cinzel font-bold md:text-[60px] text-[38px] leading-[44px] tracking-[-0.06em] text-[#F5F3E8] text-center",
-      subtitle: "w-full font-clash-display font-medium text-[18px] leading-[24px] tracking-[-0.01em] text-[#F5F3E8] text-center",
-      description: "w-full mt-[10px] font-clash font-normal text-[16px] leading-[1.3] tracking-[0em] text-white text-center",
+      title: "w-full font-cinzel font-bold md:text-[50px] text-[38px] leading-[44px] tracking-[-0.06em] text-[#F5F3E8] text-center",
+      subtitle: "w-full font-clash-display font-medium text-[17px] md:text-[23px] leading-[30px]  md:leading-[36px] tracking-[-0.01em] text-[#F5F3E8] text-center",
+      description: "w-full mt-[10px] font-clash font-normal text-[16px] md:text-[20px] leading-[1.3] tracking-[0em] text-white text-center",
       button: "mt-[15px] text-[14px]",
     }
     : {
