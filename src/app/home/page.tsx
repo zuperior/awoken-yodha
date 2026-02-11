@@ -1,6 +1,8 @@
 "use client"
 
+import { useState } from "react";
 import Button from "@/components/Button";
+import Awareness from "@/components/Awareness";
 
 type Step = {
   id: number;
@@ -56,7 +58,7 @@ const MobileStepItem = ({ id, title }: { id: number; title: string }) => {
 };
 
 
-const HeroContent = ({ isMobile = false }: { isMobile?: boolean }) => {
+const HeroContent = ({ isMobile = false, onStart }: { isMobile?: boolean; onStart?: () => void }) => {
   const textClasses = isMobile
     ? {
       title: "w-full font-cinzel font-bold md:text-[50px] text-[38px] leading-[44px] tracking-[-0.06em] text-[#F5F3E8] text-center",
@@ -84,7 +86,7 @@ const HeroContent = ({ isMobile = false }: { isMobile?: boolean }) => {
         architecture
       </h2>
 
-      <Button variant="titleRed" className={textClasses.button}>
+      <Button variant="titleRed" className={textClasses.button} onClick={onStart}>
         Start Your Journey
       </Button>
     </>
@@ -120,16 +122,19 @@ const Disclaimer = ({ isMobile = false }: { isMobile?: boolean }) => {
 };
 
 export default function HomePage() {
+  const [open, setOpen] = useState(false);
   return (
     <div className="relative w-full lg:h-[623px] h-screen pb-[50px] lg:mt-[160px] mt-0 flex">
 
-      <div className="relative h-[241px] lg:flex hidden flex-col justify-center items-start pb-[50px] pt-[435px] pl-[124px] pr-[290px]">
-        <HeroContent />
+      <Awareness open={open} onClose={() => setOpen(false)} />
+
+      <div className="relative h-[241px] lg:flex hidden flex-col justify-center items-start pb-[50px] pt-[435px] pl-[26px] pr-[290px]">
+        <HeroContent onStart={() => setOpen(true)} />
       </div>
 
 
       <div className="lg:hidden absolute bottom-[50px] left-0 right-0 px-6 flex flex-col items-center">
-        <HeroContent isMobile />
+        <HeroContent isMobile onStart={() => setOpen(true)} />
 
 
         <div className="flex flex-col items-center gap-4 mt-8 w-full">

@@ -1,11 +1,13 @@
+"use client";
 import type { Metadata } from "next";
-import Link from "next/link";
+import { useState } from "react";
 import { clashGrotesk, cinzelDecorative, clashDisplay } from "./_fonts";
 import "./globals.css";
 import { LenisWrapper } from "../components/LenisWrapper";
 import Navbar from "@/components/Navbar";
+import Awareness from "@/components/Awareness";
 
-export const metadata: Metadata = {
+ const metadata: Metadata = {
   title: "Awoke Yodha",
   description: "Awoke Yodha",
 };
@@ -15,13 +17,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [awarenessOpen, setAwarenessOpen] = useState(false);
   return (
     <html lang="en" className={`${clashGrotesk.variable} ${clashDisplay.className} ${cinzelDecorative.variable}`}>
       <body
         className="antialiased"
       >
         <LenisWrapper>
-          <Navbar />
+          <Navbar onOpenAwareness={() => setAwarenessOpen(true)} />
+          <Awareness open={awarenessOpen} onClose={() => setAwarenessOpen(false)} />
           {children}
         </LenisWrapper>
       </body>
