@@ -13,15 +13,17 @@ body {
 body {
   background-image: url('/home/background-image.png');
   background-size: cover;
-  background-position: center;
+  background-position: 40% center; 
   background-repeat: no-repeat;
 }
+
+
+
 
 .font-cinzel {
   font-family: var(--font-cinzel-decorative), serif;
 }
 
-/* (Optional) Utility class for Clash also */
 .font-clash {
   font-family: var(--font-clash-grotesk), sans-serif;
 }

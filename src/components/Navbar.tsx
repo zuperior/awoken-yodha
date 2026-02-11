@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Button from "@/components/Button";
+import Link from "next/link";
 
 const Navbar = () => {
     return (
@@ -17,9 +18,12 @@ const Navbar = () => {
                     />
                 </div>
                 <div className="flex items-center gap-2 cursor-pointer">
-                     <Button variant="textSmall" className="mt-[15px] self-start">
-                          Join Waitlist
-                           </Button>
+
+                    <Link href="/awareness">
+                        <Button variant="textSmall" className=" self-start">
+                            Join Waitlist
+                        </Button>
+                    </Link>
                 </div>
 
             </div>
