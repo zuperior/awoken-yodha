@@ -74,7 +74,7 @@ export default function AwarenessPage({ open, onClose }: AwarenessProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
+      className="fixed inset-0 z-40 flex items-center justify-center bg-black/80 p-4"
       onClick={onClose}
     >
       <div
@@ -84,16 +84,16 @@ export default function AwarenessPage({ open, onClose }: AwarenessProps) {
         aria-modal="true"
       >
         <div className="relative flex w-full items-center justify-center md:w-1/2">
-          <div className="relative h-[250px] w-full md:h-[490px] p-[5px]">
-            <div className="relative h-full w-full overflow-hidden rounded-[10px] md:rounded-[28px]">
-              <Image
-                src="/awareness/man.webp"
-                alt="Awareness Illustration"
-                fill
-                priority
-                className="object-cover lg:object-contain"
-              />
-            </div>
+        <div className="relative h-[350px] w-[380px] lg:w-full md:w-full md:h-[490px] p-[5px]">
+                    <div className="relative h-full w-full overflow-hidden rounded-[10px] md:rounded-[28px]">
+                      <Image
+                        src="/awareness/man.webp"
+                        alt="Awareness Illustration"
+                        fill
+                        priority
+                        className="object-fit lg:object-contain "
+                      />
+                    </div>
           </div>
         </div>
 
@@ -138,15 +138,15 @@ export default function AwarenessPage({ open, onClose }: AwarenessProps) {
                   <button type="button" onClick={() => setDropdownOpen(!dropdownOpen)} className="flex items-center gap-2 pr-3">
                     <ReactCountryFlag svg countryCode={selectedCountry.code} className="text-xl" />
                     <span className="text-[14px] text-[#999999]">{selectedCountry.dialCode}</span>
-                    <ChevronDown size={16} className="text-[#999999]" />
+                    <ChevronDown size={38} className="text-[#999999]" />
                   </button>
 
-                  <div className="ml-4 h-6 w-px bg-[#f2f0f0]" />
+                  <div className="h-6 w-px bg-[#f2f0f0]" />
 
                   <input
                     type="tel"
                     value={phone}
-                    onChange={(e) => setPhone(e.target.value.replace(/\D/g, '').slice(0, 13))}
+                    onChange={(e) => setPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
                     placeholder="XXXXXXXXXX"
                     className="ml-3 w-full bg-transparent text-[14px] text-[#999999] outline-none"
                   />

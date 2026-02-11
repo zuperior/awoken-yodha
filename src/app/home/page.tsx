@@ -50,13 +50,12 @@ const MobileStepItem = ({ id, title }: { id: number; title: string }) => {
       <div className="w-[40px] h-[40px] flex justify-center items-center rounded-full bg-[#FBFBD9] font-medium text-[14px] shrink-0">
         {id}
       </div>
-      <span className="font-clash   text-[12px] md:text-[16px] text-[#FFFFFF] text-center px-1 leading-[1.3em]  tracking-0">
+      <span className="font-clash   text-[12px]  md:text-[16px] text-[#FFFFFF] text-center px-1 leading-[1.3em]  tracking-0">
         {title}
       </span>
     </div>
   );
-};
-
+}; 
 
 const HeroContent = ({ isMobile = false, onStart }: { isMobile?: boolean; onStart?: () => void }) => {
   const textClasses = isMobile
@@ -71,7 +70,7 @@ const HeroContent = ({ isMobile = false, onStart }: { isMobile?: boolean; onStar
       subtitle: "w-[552px] h-[36px] font-clash-display font-medium text-[25px] leading-[36px] tracking-[-0.01em] text-[#F5F3E8] whitespace-nowrap",
       description: "w-[422px] h-[52px] mt-[15px] font-clash font-normal text-[20px] leading-[1.3] tracking-[0em] text-white",
       button: "mt-[15px] self-start",
-    };
+    }; 
 
   return (
     <>
