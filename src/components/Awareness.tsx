@@ -84,29 +84,28 @@ export default function AwarenessPage({ open, onClose }: AwarenessProps) {
         aria-modal="true"
       >
         <div className="relative flex w-full items-center justify-center md:w-1/2">
-        <div className="relative h-[350px] w-[380px] lg:w-full md:w-full md:h-[490px] p-[5px]">
-                    <div className="relative h-full w-full overflow-hidden rounded-[10px] md:rounded-[28px]">
-                      <Image
-                        src="/awareness/man.webp"
-                        alt="Awareness Illustration"
-                        fill
-                        priority
-                        className="object-fit lg:object-contain "
-                      />
-                    </div>
+          <div className="relative h-[350px] w-[380px] lg:w-full md:w-full md:h-[490px] p-[5px]">
+            <div className="relative h-full w-full overflow-hidden rounded-[10px] md:rounded-[28px]">
+              <Image
+                src="/awareness/man.webp"
+                alt="Awareness Illustration"
+                fill
+                priority
+                className="object-fit lg:object-contain "
+              />
+            </div>
           </div>
         </div>
 
         {/* FORM */}
         <div className="flex w-full items-center justify-center px-4 py-5 md:w-1/2 md:p-6">
           <div className="w-full max-w-sm">
-         
-
             <h1 className="mb-6 text-center text-[26px] font-medium text-[#000000] font-clash">
               Declare Your Identity
             </h1>
 
             <form className="space-y-3">
+              {/* Name Field */}
               <div>
                 <label className="mb-1 hidden text-[12px] font-medium text-[#888888] md:block">
                   Name
@@ -118,6 +117,7 @@ export default function AwarenessPage({ open, onClose }: AwarenessProps) {
                 />
               </div>
 
+              {/* Email Field */}
               <div>
                 <label className="mb-1 hidden text-[12px] font-medium text-[#888888] md:block">
                   Email
@@ -129,67 +129,116 @@ export default function AwarenessPage({ open, onClose }: AwarenessProps) {
                 />
               </div>
 
+              {/* Phone Number Field with Country Selector */}
               <div className="relative">
+                {/* Mobile label - shows only on mobile */}
+                <label className="mb-1 block text-[12px] font-medium text-[#888888] md:hidden">
+                  Phone Number
+                </label>
+                
+                {/* Desktop label - hidden on mobile */}
                 <label className="mb-1 hidden text-[12px] font-medium text-[#888888] md:block">
                   Phone Number
                 </label>
 
                 <div className="flex items-center rounded-[12px] border border-[#f2f0f0] bg-zinc-50 px-3 py-2">
-                  <button type="button" onClick={() => setDropdownOpen(!dropdownOpen)} className="flex items-center gap-2 pr-3">
-                    <ReactCountryFlag svg countryCode={selectedCountry.code} className="text-xl" />
+                  {/* Country selector button */}
+                  <button 
+                    type="button" 
+                    onClick={() => setDropdownOpen(!dropdownOpen)} 
+                    className="flex items-center gap-2 pr-3 hover:opacity-80 transition-opacity"
+                  >
+                    <ReactCountryFlag 
+                      svg 
+                      countryCode={selectedCountry.code} 
+                      className="text-xl"
+                      style={{
+                        fontSize: '1.5rem',
+                        width: '1.5rem',
+                        height: '1.5rem'
+                      }}
+                    />
                     <span className="text-[14px] text-[#999999]">{selectedCountry.dialCode}</span>
-                    <ChevronDown size={38} className="text-[#999999]" />
+                    <ChevronDown 
+                      size={18} 
+                      className={`text-[#999999] transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`}
+                    />
                   </button>
 
-                  <div className="h-6 w-px bg-[#f2f0f0]" />
+                  {/* Vertical divider */}
+                  <div className="h-6 w-px bg-[#e0e0e0]" />
 
+                  {/* Phone number input */}
                   <input
                     type="tel"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
                     placeholder="XXXXXXXXXX"
-                    className="ml-3 w-full bg-transparent text-[14px] text-[#999999] outline-none"
+                    className="ml-3 w-full bg-transparent text-[14px] text-[#333333] outline-none placeholder:text-[#999999]"
                   />
                 </div>
 
                 {/* Dropdown */}
                 {dropdownOpen && (
-                  <div ref={dropdownRef} className="absolute z-20 mt-2 w-full rounded-xl bg-white shadow-lg">
+                  <div 
+                    ref={dropdownRef} 
+                    className="absolute z-20 mt-2 w-full rounded-xl bg-white shadow-lg border border-gray-100"
+                  >
+                    {/* Search input */}
                     <input
                       type="text"
                       placeholder="Search countries..."
                       value={search}
                       onChange={(e) => setSearch(e.target.value)}
-                      className="w-full rounded-t-xl border-b px-4 py-3 text-sm outline-none placeholder-[#999999]"
+                      className="w-full rounded-t-xl border-b px-4 py-3 text-sm outline-none placeholder:text-[#999999] focus:border-[#333333]"
                     />
 
+                    {/* Countries list */}
                     <div className="max-h-44 overflow-y-auto">
-                      {filteredCountries.map((country) => (
-                        <button
-                          key={country.code}
-                          type="button"
-                          onClick={() => {
-                            setSelectedCountry(country);
-                            setDropdownOpen(false);
-                            setSearch('');
-                          }}
-                          className="flex w-full items-center justify-between px-4 py-3 hover:bg-zinc-100"
-                        >
-                          <div className="flex items-center gap-3">
-                            <ReactCountryFlag svg countryCode={country.code} className="text-xl" />
-                            <span className="text-sm text-[#999999]">{country.name}</span>
-                          </div>
-                          <span className="text-sm text-[#999999]">{country.dialCode}</span>
-                        </button>
-                      ))}
+                      {filteredCountries.length > 0 ? (
+                        filteredCountries.map((country) => (
+                          <button
+                            key={country.code}
+                            type="button"
+                            onClick={() => {
+                              setSelectedCountry(country);
+                              setDropdownOpen(false);
+                              setSearch('');
+                            }}
+                            className={`flex w-full items-center justify-between px-4 py-3 hover:bg-zinc-50 transition-colors ${
+                              selectedCountry.code === country.code ? 'bg-zinc-50' : ''
+                            }`}
+                          >
+                            <div className="flex items-center gap-3">
+                              <ReactCountryFlag 
+                                svg 
+                                countryCode={country.code} 
+                                className="text-xl"
+                                style={{
+                                  fontSize: '1.25rem',
+                                  width: '1.25rem',
+                                  height: '1.25rem'
+                                }}
+                              />
+                              <span className="text-sm text-[#333333]">{country.name}</span>
+                            </div>
+                            <span className="text-sm text-[#666666]">{country.dialCode}</span>
+                          </button>
+                        ))
+                      ) : (
+                        <div className="px-4 py-3 text-sm text-[#999999]">
+                          No countries found
+                        </div>
+                      )}
                     </div>
                   </div>
                 )}
               </div>
 
+              {/* Submit button */}
               <button
                 type="button"
-                className="w-full rounded-[10px] bg-[#333333] px-6 py-2 text-[16px] font-medium text-white hover:bg-[#444444] font-clash"
+                className="w-full rounded-[10px] bg-[#333333] px-6 py-2 text-[16px] font-medium text-white hover:bg-[#444444] transition-colors font-clash"
               >
                 Download PDF
               </button>
@@ -200,4 +249,3 @@ export default function AwarenessPage({ open, onClose }: AwarenessProps) {
     </div>
   );
 }
-

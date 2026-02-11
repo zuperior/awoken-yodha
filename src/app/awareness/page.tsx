@@ -40,11 +40,23 @@ export default function AwarenessPage() {
     country.name.toLowerCase().includes(search.toLowerCase())
   );
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
 
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
-    <div className="fixed inset-0  flex items-center justify-center bg-black/50 lg:p-4 md:p-4  p-5">
-      <div className="flex w-full md:max-w-[500px] lg:max-w-[750px] flex-col rounded-[18px] bg-[#FFFFFF] shadow-lg  md:h-[500px] h-auto lg:h-[500px] md:flex-row">
+    <div className="fixed inset-0 flex items-center justify-center bg-black/50 lg:p-4 md:p-4 p-5">
+      <div className="flex w-full md:max-w-[500px] lg:max-w-[750px] flex-col rounded-[18px] bg-[#FFFFFF] shadow-lg md:h-[500px] h-auto lg:h-[500px] md:flex-row">
         {/* Left side - Image */}
         <div className="relative flex w-full items-center justify-center md:w-1/2">
           <div className="relative h-[350px] w-[380px] lg:w-full md:w-full md:h-[490px] p-[5px]">
@@ -54,7 +66,7 @@ export default function AwarenessPage() {
                 alt="Awareness Illustration"
                 fill
                 priority
-                className="object-fit lg:object-contain "
+                className="object-fit lg:object-contain"
               />
             </div>
           </div>
@@ -63,7 +75,7 @@ export default function AwarenessPage() {
         {/* Right side - FORM */}
         <div className="flex w-full items-center justify-center px-4 mdLpy-4 py-1 lg:py-5 md:w-1/2 md:p-6">
           <div className="w-full max-w-sm">
-            <h1 className="lg:mb-6  md:mb-5 mb-2 text-center text-[26px] font-medium text-[#000000] font-clash">
+            <h1 className="lg:mb-6 md:mb-5 mb-2 text-center text-[26px] font-medium text-[#000000] font-clash">
               Declare Your Identity
             </h1>
 
@@ -94,6 +106,12 @@ export default function AwarenessPage() {
 
               {/* Phone Number Field with Country Selector */}
               <div className="relative">
+                {/* Label for mobile only - shows above input */}
+                <label className="mb-1 block text-[12px] font-medium text-[#888888] md:hidden">
+                  Phone Number
+                </label>
+                
+                {/* Label for desktop only - hidden on mobile */}
                 <label className="mb-1 hidden text-[12px] font-medium text-[#888888] md:block">
                   Phone Number
                 </label>
@@ -117,13 +135,13 @@ export default function AwarenessPage() {
                     />
                     <span className="text-[14px] text-[#999999]">{selectedCountry.dialCode}</span>
                     <ChevronDown 
-                      size={38} 
-                      className={`text-[#999999]   transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`}
+                      size={18} 
+                      className={`text-[#999999] transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`}
                     />
                   </button>
 
                   {/* Vertical divider */}
-                  <div className=" h-6 w-px bg-[#e0e0e0]" />
+                  <div className="h-6 w-px bg-[#e0e0e0]" />
 
                   {/* Phone number input */}
                   <input
@@ -139,7 +157,7 @@ export default function AwarenessPage() {
                 {dropdownOpen && (
                   <div 
                     ref={dropdownRef} 
-                    className="absolute  mt-2 w-full rounded-xl bg-white shadow-lg border border-gray-100"
+                    className="absolute z-20 mt-2 w-full rounded-xl bg-white shadow-lg border border-gray-100"
                   >
                     {/* Search input */}
                     <input
