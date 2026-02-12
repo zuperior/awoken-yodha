@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import ReactCountryFlag from 'react-country-flag';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, X } from 'lucide-react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 type Country = {
   name: string;
@@ -40,71 +41,73 @@ export default function AwarenessPage({ open, onClose }: AwarenessProps) {
   const [selectedCountry, setSelectedCountry] = useState<Country>(COUNTRIES[0]);
   const [phone, setPhone] = useState("");
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   const filteredCountries = COUNTRIES.filter((country) =>
     country.name.toLowerCase().includes(search.toLowerCase())
   );
 
-  // Close dropdown when clicking outside; also handle Escape to close dropdown/modal
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setDropdownOpen(false);
-      }
-    };
+  const handleClose = () => {
+    onClose();
+    router.replace("/");
+    dropdownRef.current = null;
+    setDropdownOpen(false);
+    setSearch("");
+    setSelectedCountry(COUNTRIES[0]);
+    setPhone("");
+  };
 
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        if (dropdownOpen) setDropdownOpen(false);
-        else onClose();
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('keydown', handleEsc);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('keydown', handleEsc);
-    };
-  }, [dropdownOpen, onClose]);
-
-  // If not open, render nothing
   if (!open) return null;
 
   return (
     <div
-      className="fixed inset-0 z-40 flex items-center justify-center bg-black/80 p-4"
-      onClick={onClose}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
     >
       <div
-        className="flex w-full md:max-w-[500px] lg:max-w-[750px] flex-col rounded-[18px] bg-[#FFFFFF] shadow-lg h-auto md:h-[500px] md:flex-row "
+        className="relative flex w-full md:max-w-[500px] lg:max-w-[750px] flex-col rounded-[18px] bg-[#FFFFFF] shadow-lg h-fit md:h-[500px] md:flex-row "
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
       >
+        {/* Close Button */}
+        <button
+          onClick={handleClose}
+          className="
+    absolute z-50 transition
+
+    right-1 top-1 p-2 rounded-full bg-white shadow-md   /* Mobile style */
+
+    md:right-2 md:top-2 md:p-2 md:rounded-full md:bg-transparent md:shadow-none  /* Desktop (your original look) */
+
+    hover:bg-gray-100
+  "
+        >
+          <X size={22} className="text-black" />
+        </button>
+
+
         <div className="relative flex w-full items-center justify-center md:w-1/2">
-          <div className="relative h-[350px] w-[380px] lg:w-full md:w-full md:h-[490px] p-[5px]">
+          <div className="relative h-[250px] w-[250px] lg:w-full md:w-full md:h-[490px] p-[5px]">
             <div className="relative h-full w-full overflow-hidden rounded-[10px] md:rounded-[28px]">
               <Image
                 src="/awareness/man.webp"
                 alt="Awareness Illustration"
                 fill
                 priority
-                className="object-fit lg:object-contain "
+                className="object-cover lg:object-contain "
               />
             </div>
           </div>
         </div>
 
         {/* FORM */}
-        <div className="flex w-full items-center justify-center px-4 py-5 md:w-1/2 md:p-6">
+        <div className="flex w-full items-center justify-center md:px-4 px-2 lg:px-4 md:py-4 py-0 lg:py-5 md:w-1/2 md:p-6">
           <div className="w-full max-w-sm">
-            <h1 className="mb-6 text-center text-[26px] font-medium text-[#000000] font-clash">
+            <h1 className="lg:mb-6 md:mb-5 mb-0 text-center md:text-[22px] text-[20px] lg:text-[26px] font-medium text-[#000000] font-clash">
               Declare Your Identity
             </h1>
 
-            <form className="space-y-3">
+            <form className="space-y-3 p-2">
               {/* Name Field */}
               <div>
                 <label className="mb-1 hidden text-[12px] font-medium text-[#888888] md:block">
@@ -129,28 +132,24 @@ export default function AwarenessPage({ open, onClose }: AwarenessProps) {
                 />
               </div>
 
-              {/* Phone Number Field with Country Selector */}
+              {/* Phone Field */}
               <div className="relative">
-                {/* Mobile label - shows only on mobile */}
                 <label className="mb-1 block text-[12px] font-medium text-[#888888] md:hidden">
                   Phone Number
                 </label>
-                
-                {/* Desktop label - hidden on mobile */}
                 <label className="mb-1 hidden text-[12px] font-medium text-[#888888] md:block">
                   Phone Number
                 </label>
 
                 <div className="flex items-center rounded-[12px] border border-[#f2f0f0] bg-zinc-50 px-3 py-2">
-                  {/* Country selector button */}
-                  <button 
-                    type="button" 
-                    onClick={() => setDropdownOpen(!dropdownOpen)} 
+                  <button
+                    type="button"
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
                     className="flex items-center gap-2 pr-3 hover:opacity-80 transition-opacity"
                   >
-                    <ReactCountryFlag 
-                      svg 
-                      countryCode={selectedCountry.code} 
+                    <ReactCountryFlag
+                      svg
+                      countryCode={selectedCountry.code}
                       className="text-xl"
                       style={{
                         fontSize: '1.5rem',
@@ -159,16 +158,14 @@ export default function AwarenessPage({ open, onClose }: AwarenessProps) {
                       }}
                     />
                     <span className="text-[14px] text-[#999999]">{selectedCountry.dialCode}</span>
-                    <ChevronDown 
-                      size={36} 
+                    <ChevronDown
+                      size={36}
                       className={`text-[#999999] transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`}
                     />
                   </button>
 
-                  {/* Vertical divider */}
                   <div className="h-6 w-px bg-[#e0e0e0]" />
 
-                  {/* Phone number input */}
                   <input
                     type="tel"
                     value={phone}
@@ -178,23 +175,23 @@ export default function AwarenessPage({ open, onClose }: AwarenessProps) {
                   />
                 </div>
 
-                {/* Dropdown */}
                 {dropdownOpen && (
-                  <div 
-                    ref={dropdownRef} 
+                  <div
+                    ref={dropdownRef}
                     className="absolute z-20 mt-2 w-full rounded-xl bg-white shadow-lg border border-gray-100"
                   >
-                    {/* Search input */}
                     <input
                       type="text"
                       placeholder="Search countries..."
                       value={search}
                       onChange={(e) => setSearch(e.target.value)}
-                      className="w-full rounded-t-xl border-b px-4 py-3 text-sm outline-none placeholder:text-[#999999] focus:border-[#333333]"
+                      className="w-full rounded-t-xl border-b px-4  md:py-2 py-2 lg:py-3 text-sm outline-none placeholder:text-[#999999] focus:border-[#333333]"
                     />
 
-                    {/* Countries list */}
-                    <div className="max-h-44 overflow-y-auto">
+                    <div
+                      className="lg:max-h-44 md:max-h-40 max-h-20 overflow-y-auto"
+                      onWheel={(e) => e.stopPropagation()}
+                    >
                       {filteredCountries.length > 0 ? (
                         filteredCountries.map((country) => (
                           <button
@@ -205,14 +202,13 @@ export default function AwarenessPage({ open, onClose }: AwarenessProps) {
                               setDropdownOpen(false);
                               setSearch('');
                             }}
-                            className={`flex w-full items-center justify-between px-4 py-3 hover:bg-zinc-50 transition-colors ${
-                              selectedCountry.code === country.code ? 'bg-zinc-50' : ''
-                            }`}
+                            className={`flex w-full items-center justify-between px-4 md:py-2 py-2 lg:py-3 hover:bg-zinc-50 transition-colors ${selectedCountry.code === country.code ? 'bg-zinc-50' : ''
+                              }`}
                           >
                             <div className="flex items-center gap-3">
-                              <ReactCountryFlag 
-                                svg 
-                                countryCode={country.code} 
+                              <ReactCountryFlag
+                                svg
+                                countryCode={country.code}
                                 className="text-xl"
                                 style={{
                                   fontSize: '1.25rem',
@@ -235,7 +231,6 @@ export default function AwarenessPage({ open, onClose }: AwarenessProps) {
                 )}
               </div>
 
-              {/* Submit button */}
               <button
                 type="button"
                 className="w-full rounded-[10px] bg-[#333333] px-6 py-2 text-[16px] font-medium text-white hover:bg-[#444444] transition-colors font-clash"
