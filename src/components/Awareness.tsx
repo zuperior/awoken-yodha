@@ -160,7 +160,7 @@ export default function AwarenessPage({ open, onClose }: AwarenessProps) {
                     />
                     <span className="text-[14px] text-[#999999]">{selectedCountry.dialCode}</span>
                     <ChevronDown 
-                      size={18} 
+                      size={36} 
                       className={`text-[#999999] transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`}
                     />
                   </button>

@@ -40,22 +40,9 @@ export default function AwarenessPage() {
     country.name.toLowerCase().includes(search.toLowerCase())
   );
 
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setDropdownOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/50 lg:p-4 md:p-4 p-5">
+    <div className="fixed inset-0 flex items-center justify-center bg-black/90 lg:p-4 md:p-4 p-5">
       <div className="flex w-full md:max-w-[500px] lg:max-w-[750px] flex-col rounded-[18px] bg-[#FFFFFF] shadow-lg md:h-[500px] h-auto lg:h-[500px] md:flex-row">
         {/* Left side - Image */}
         <div className="relative flex w-full items-center justify-center md:w-1/2">
@@ -105,7 +92,7 @@ export default function AwarenessPage() {
               </div>
 
               {/* Phone Number Field with Country Selector */}
-              <div className="relative">
+              <div className="relative ">
                 {/* Label for mobile only - shows above input */}
                 <label className="mb-1 block text-[12px] font-medium text-[#888888] md:hidden">
                   Phone Number
@@ -135,7 +122,7 @@ export default function AwarenessPage() {
                     />
                     <span className="text-[14px] text-[#999999]">{selectedCountry.dialCode}</span>
                     <ChevronDown 
-                      size={18} 
+                      size={36} 
                       className={`text-[#999999] transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`}
                     />
                   </button>
@@ -157,7 +144,7 @@ export default function AwarenessPage() {
                 {dropdownOpen && (
                   <div 
                     ref={dropdownRef} 
-                    className="absolute z-20 mt-2 w-full rounded-xl bg-white shadow-lg border border-gray-100"
+                    className="absolute z-50 mt-2 w-full rounded-xl bg-white shadow-lg border border-gray-100"
                   >
                     {/* Search input */}
                     <input
@@ -169,7 +156,7 @@ export default function AwarenessPage() {
                     />
 
                     {/* Countries list */}
-                    <div className="max-h-[200px] overflow-y-auto">
+                    <div className="max-h-[100px] overflow-y-auto">
                       {filteredCountries.length > 0 ? (
                         filteredCountries.map((country) => (
                           <button
